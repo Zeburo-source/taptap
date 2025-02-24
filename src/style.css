@@ -1,0 +1,130 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif; /* Используем Roboto, можно подключить через Google Fonts */
+    background: linear-gradient(to bottom, #C8E6C9, #FFFFFF); /* Градиент от светло-зелёного к белому */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+}
+
+.game-container {
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9); /* Полупрозрачный белый фон для контраста */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Лёгкая тень для глубины */
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stats div {
+    background: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 20px; /* Круглые индикаторы для очков и энергии */
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 45%;
+}
+
+.tap-area {
+    margin: 20px 0;
+    cursor: pointer;
+    display: flex; /* Добавляем flex для центрирования */
+    justify-content: center; /* Горизонтальное центрирование */
+    align-items: center; /* Вертикальное центрирование */
+}
+
+.tap-button {
+    padding: 40px; /* Увеличенное внутреннее пространство для круглой формы */
+    width: 120px; /* Фиксированная ширина для круглой формы */
+    height: 120px; /* Фиксированная высота, равная ширине, для круглой формы */
+    background: #8B4513; /* Коричневый фон для кнопки "кала" */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Делает кнопку строго круглой */
+    font-size: 24px;
+    font-weight: bold;
+    user-select: none;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex; /* Центрирование текста внутри кнопки */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.tap-button:hover {
+    background: #7F3F0D; /* Темнее при наведении */
+    transform: scale(1.05);
+}
+
+.tap-button:active {
+    transform: scale(0.95);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.tap-button {
+    animation: pulse 2s infinite; /* Анимация пульсации */
+}
+
+.upgrades {
+    margin-top: 20px;
+}
+
+#upgradeClick {
+    padding: 10px 20px;
+    background: #4CAF50; /* Зелёный фон для кнопки улучшения */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Вернули закруглённые углы, как в изначальном состоянии */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#upgradeClick:disabled {
+    background: #B0BEC5; /* Серый для неактивной кнопки */
+    cursor: not-allowed;
+}
+
+#upgradeClick:hover:not(:disabled) {
+    background: #45A049; /* Темнее при наведении */
+    transform: scale(1.05);
+}
+
+#upgradeClick:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-50px) scale(0.8); }
+}
+
+.tap-effect {
+    position: absolute;
+    color: #4CAF50; /* Зелёный цвет для эффекта "+X" */
+    font-size: 20px;
+    font-weight: bold;
+    pointer-events: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    animation: floatUp 1s ease-out forwards;
+}

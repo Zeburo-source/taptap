@@ -4,41 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тапалка</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .game-container {
-            text-align: center;
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
-        }
-        .tap-area {
-            margin: 20px 0;
-            cursor: pointer;
-        }
-        .tap-button {
-            padding: 40px;
-            background: #4CAF50;
-            color: white;
-            border-radius: 50%;
-            font-size: 24px;
-            border: none;
-            user-select: none;
-        }
-        @keyframes floatUp {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-50px); }
-        }
-    </style>
+    <link rel="stylesheet" href="src/style.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline' 'unsafe-eval'; img-src * data:; connect-src *;">
 </head>
 <body>
     <div class="game-container">
@@ -53,74 +20,6 @@
             <button id="upgradeClick" disabled>Улучшить клик (10)</button>
         </div>
     </div>
-
-    <script>
-        let score = 0;
-let clickValue = 1;
-let energy = 100;
-let maxEnergy = 100;
-let energyRecoveryRate = 1;
-
-// Обработчики событий
-const setupEventListeners = () => {
-    const tapButton = document.getElementById('tapButton');
-    const upgradeButton = document.getElementById('upgradeClick');
-
-    tapButton.addEventListener('click', (event) => {
-        if (energy >= clickValue) {
-            score += clickValue;
-            energy -= clickValue;
-            updateUI();
-            createTapEffect(event);
-        }
-    });
-
-    upgradeButton.addEventListener('click', () => {
-        if (score >= 10) {
-            score -= 10;
-            clickValue += 1;
-            updateUI();
-        }
-    });
-};
-
-// Эффект при тапе
-const createTapEffect = (event) => {
-    const effect = document.createElement('div');
-    effect.textContent = `+${clickValue}`;
-    effect.style.position = 'absolute';
-    effect.style.color = '#fff';
-    effect.style.fontSize = '20px';
-    effect.style.pointerEvents = 'none';
-    effect.style.animation = 'floatUp 1s ease-out forwards';
-    effect.style.left = `${event.clientX}px`;
-    effect.style.top = `${event.clientY}px`;
-
-    document.body.appendChild(effect);
-    setTimeout(() => effect.remove(), 1000);
-};
-
-// Восстановление энергии
-const startEnergyRecovery = () => {
-    setInterval(() => {
-        if (energy < maxEnergy) {
-            energy = Math.min(maxEnergy, energy + energyRecoveryRate);
-            updateUI();
-        }
-    }, 1000);
-};
-
-// Обновление интерфейса
-const updateUI = () => {
-    document.getElementById('score').textContent = `Счет: ${score}`;
-    document.getElementById('energy').textContent = `Энергия: ${energy}/${maxEnergy}`;
-    const upgradeButton = document.getElementById('upgradeClick');
-    upgradeButton.disabled = score < 10;
-};
-
-// Инициализация
-setupEventListeners();
-startEnergyRecovery();
-    </script>
+    <script src="script/script.js"></script>
 </body>
 </html>
